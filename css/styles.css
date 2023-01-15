@@ -1,0 +1,55 @@
+* {
+    margin : 0;
+    padding: 0;
+}
+
+.piano {
+    display         : flex;
+    margin          : 50px 30px;
+    padding         : 10px;
+    background-color: gray;
+    position        : relative;
+}
+
+.piano .key {
+    height          : 160px;
+    width           : 60px;
+    background-color: whitesmoke;
+    border          : 1px solid black;
+}
+
+.piano .sharp {
+    height          : 120px;
+    width           : 40px;
+    background-color: black;
+    border          : 1px solid black;
+}
+
+.C-SHARP {
+    position: absolute;
+    left    : 50px;
+}
+
+.D-SHARP {
+    position: absolute;
+    left    : 115px;
+}
+
+.F-SHARP {
+    position: absolute;
+    left    : 235px;
+}
+
+.G-SHARP {
+    position: absolute;
+    left    : 300px;
+}
+
+.A-SHARP {
+    position: absolute;
+    left    : 360px;
+}
+
+.piano .onKey{
+    background-color: chartreuse;
+}
