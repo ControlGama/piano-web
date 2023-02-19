@@ -1,39 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/styles.css" />
     <title>Piano</title>
-</head>
-<body>
-    
+  </head>
+  <body>
+    <div class="display-container">
+      <div class="display">C</div>
+    </div>
+
     <div class="piano">
+      <div class="key B2"></div>
+
+      <div class="subkey">
         <div class="key C"></div>
         <div class="key sharp C-SHARP"></div>
+      </div>
+
+      <div class="subkey">
         <div class="key D"></div>
         <div class="key sharp D-SHARP"></div>
-        <div class="key E"></div>
+      </div>
+
+      <div class="key E"></div>
+
+      <div class="subkey">
         <div class="key F"></div>
         <div class="key sharp F-SHARP"></div>
+      </div>
+
+      <div class="subkey">
         <div class="key G"></div>
         <div class="key sharp G-SHARP"></div>
+      </div>
+
+      <div class="subkey">
         <div class="key A"></div>
         <div class="key sharp A-SHARP"></div>
-        <div class="key B"></div>
+      </div>
+
+      <div class="key B"></div>
+
+      <div class="key C3"></div>
     </div>
 
-    <div class="buttons-Controls-Container">
+    <div class="buttons-container">
+      <div class="buttons-Controls-Container">
         <button onclick="Back()">Back</button>
         <button onclick="Next()">Next</button>
-    </div>
+      </div>
 
-    <div class="buttons-Container">
+      <div class="buttons-Controls-Container">
         <button onclick="Mayor()">Escala Mayor</button>
         <button onclick="Menor()">Escala Menor</button>
+      </div>
     </div>
 
     <script src="./js/main.js"></script>
-</body>
+  </body>
 </html>
