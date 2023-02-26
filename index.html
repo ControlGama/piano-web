@@ -9,11 +9,25 @@
   </head>
   <body>
     <div class="display-container">
-      <div class="display">C</div>
+      <div class="display">--</div>
     </div>
 
     <div class="piano">
-      <div class="key B2"></div>
+      
+      <!-- ----LEFT----- -->
+      <div class="subkey">
+        <div class="key G"></div>
+        <div class="key sharp G-SHARP"></div>
+      </div>
+
+      <div class="subkey">
+        <div class="key A"></div>
+        <div class="key sharp A-SHARP"></div>
+      </div>
+
+      <div class="key B"></div>
+
+      <!-- ----CENTRAL----- -->
 
       <div class="subkey">
         <div class="key C"></div>
@@ -44,18 +58,38 @@
 
       <div class="key B"></div>
 
-      <div class="key C3"></div>
+      <!-- -----RIGHT---- -->
+
+      <div class="subkey">
+        <div class="key C"></div>
+        <div class="key sharp C-SHARP"></div>
+      </div>
+
+      <div class="subkey">
+        <div class="key D"></div>
+        <div class="key sharp D-SHARP"></div>
+      </div>
+
+      <div class="key E"></div>
+
+      <div class="subkey">
+        <div class="key F"></div>
+        <div class="key sharp F-SHARP"></div>
+      </div>
+
+      <div class="key G"></div>
+
     </div>
 
     <div class="buttons-container">
       <div class="buttons-Controls-Container">
-        <button onclick="Back()">Back</button>
-        <button onclick="Next()">Next</button>
+        <button id="btnBack">Back</button>
+        <button id="btnNext"">Next</button>
       </div>
 
       <div class="buttons-Controls-Container">
-        <button onclick="Mayor()">Escala Mayor</button>
-        <button onclick="Menor()">Escala Menor</button>
+        <button id="btnEscalaMayor">Escala Mayor</button>
+        <button id="btnEscalaMenor">Escala Menor</button>
       </div>
     </div>
 
