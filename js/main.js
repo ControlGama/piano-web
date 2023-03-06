@@ -2,7 +2,7 @@
 // 0.5 = Semitono
 
 /*
-Escala:
+Scale:
     1 - C
     2 - C#
     3 - D
@@ -21,52 +21,78 @@ Escala:
 const display = document.querySelector('.display');
 const keys = document.querySelectorAll('.key');
 
-const btnEscalaMayor = document.querySelector('#btnEscalaMayor');
-const btnEscalaMenor = document.querySelector('#btnEscalaMenor');
+const btnScaleMajor = document.querySelector('#btnScaleMajor');
+const btnScaleMinor = document.querySelector('#btnScaleMinor');
+const btnScaleMinorHarmonic = document.querySelector('#btnScaleMinorHarmonic');
 const btnBack = document.querySelector('#btnBack');
 const btnNext = document.querySelector('#btnNext');
 
 //-- Parametros Iniciales --
 const indexNotas = getIndexNotas('G');
 let intervalos = [];
-let gv_escala = 0;
+let globalScale = 0;
+console.log(indexNotas);
 
-
-btnEscalaMayor.addEventListener("click", (event) => {
-    const escalaMayorIntervalos = [1, 1, 0.5, 1, 1, 1, 0.5];
+btnScaleMajor.addEventListener("click", (event) => {
+    const ScaleMayorIntervalos = [1, 1, 0.5, 1, 1, 1, 0.5];
     display.textContent = "C";
-    intervalos = escalaMayorIntervalos;
+    intervalos = ScaleMayorIntervalos;
 
-    gv_escala = 3.5;
+    globalScale = 3.5;
 
     removeOnKeyClass();
-    printScale(gv_escala);
+    printScale(globalScale);
 });
 
-btnEscalaMenor.addEventListener("click", (event) => {
-    const escalaMenorIntervalos = [1, 0.5, 1, 1, 0.5, 1, 1];
+btnScaleMinor.addEventListener("click", (event) => {
+    const ScaleMenorIntervalos = [1, 0.5, 1, 1, 0.5, 1, 1];
     display.textContent = "C";
-    intervalos = escalaMenorIntervalos;
+    intervalos = ScaleMenorIntervalos;
 
-    gv_escala = 3.5; //3.5 = C
+    globalScale = 3.5; //3.5 = C
 
     removeOnKeyClass();
-    printScale(gv_escala);
+    printScale(globalScale);
+});
+
+btnScaleMinorHarmonic.addEventListener("click", (event) => {
+    const ScaleMenorIntervalos = [1, 0.5, 1, 1, 0.5, 1.5, 0.5];
+    display.textContent = "C";
+    intervalos = ScaleMenorIntervalos;
+
+    globalScale = 3.5; //3.5 = C
+
+    removeOnKeyClass();
+    printScale(globalScale);
 });
 
 btnNext.addEventListener("click", (event) => {
 
-    display.textContent = "C#";
-    gv_escala = gv_escala + 0.5;
-
+    globalScale = calculateScale(+0.5);
+    
+    const CurrentNote = searchNoteByIndex(globalScale);
+    display.textContent = CurrentNote.nota; 
+    
     removeOnKeyClass();
-    printScale(gv_escala);
+    printScale(globalScale);
+});
+
+btnBack.addEventListener("click", (event) => {
+
+    globalScale = calculateScale(-0.5);
+    
+    const CurrentNote = searchNoteByIndex(globalScale);
+    display.textContent = CurrentNote.nota; 
+    
+    removeOnKeyClass();
+    printScale(globalScale);
 });
 
 
-function printScale(p_escala) {
 
-    const OCTAVA = intervalos.reduce((a, b) => a + b, 0) + p_escala;
+function printScale(p_Scale) {
+
+    const OCTAVA = intervalos.reduce((a, b) => a + b, 0) + p_Scale;
 
     let keynum = 1;
     let index = -1;
@@ -74,7 +100,7 @@ function printScale(p_escala) {
     let lastKey = 0;
 
     keys.forEach((item) => {
-        if ((keynum >= p_escala) && (keynum <= OCTAVA)) {
+        if ((keynum >= p_Scale) && (keynum <= OCTAVA)) {
 
             if (index != -1) {
 
@@ -88,7 +114,7 @@ function printScale(p_escala) {
 
             } else {
                 item.classList.add("onKey")
-                lastKey = p_escala;
+                lastKey = p_Scale;
                 index = 0;
             }
         }
@@ -107,15 +133,15 @@ function getIndexNotas(InitialKey) {
     const indexNotas = [];
     const notas = ['A','A#','B','C','C#','D','D#','E','F','F#','G','G#']
     let index = 1;
-    let notaIndex = notas.indexOf(InitialKey);
+    let notaIndex = notas.indexOf(InitialKey); //Se neceita la nota inicial
     
+    //leer el total de teclas en pantalla para asignarles la nota y un indice
     keys.forEach((item) => {
         
         if (notaIndex >= notas.length){
             notaIndex = 0;
         }
-
-        const indexNota = [index, notas[notaIndex]];
+        const indexNota = {index, nota: notas[notaIndex]};
         indexNotas.push(indexNota);
         notaIndex++;
         index+=0.5;
@@ -124,3 +150,27 @@ function getIndexNotas(InitialKey) {
     return indexNotas;
 }
 
+
+function searchNoteByIndex(index){
+    return indexNotas.find(element => {
+        return element.index === index;
+    })
+}
+
+function calculateScale(index) {
+    let nextIndex = globalScale + index;
+    const OCTAVE = 6;
+    const maxIndex = indexNotas[indexNotas.length-1].index;
+
+    if (nextIndex < 1){
+        nextIndex = maxIndex-OCTAVE;
+    }
+
+    if ((nextIndex+OCTAVE) > maxIndex) {
+        nextIndex = 1;
+    }
+
+    console.log(nextIndex);
+    return nextIndex;
+
+}
